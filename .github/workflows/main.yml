@@ -1,0 +1,73 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+
+public class ComplaintsGUI extends JFrame {
+
+    private JTextArea complaintsTextArea;
+    private JButton sendButton;
+    private JLabel statusLabel;
+
+    private boolean isComplaintAvailable;
+    private Date lastComplaintTimestamp;
+
+    public ComplaintsGUI() {
+        setTitle("Student Marks Complaints");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400, 300);
+        setLayout(new BorderLayout());
+
+        complaintsTextArea = new JTextArea();
+        add(complaintsTextArea, BorderLayout.CENTER);
+
+        sendButton = new JButton("Send Complaint");
+        sendButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sendComplaint();
+            }
+        });
+        add(sendButton, BorderLayout.SOUTH);
+
+        statusLabel = new JLabel("Status: Ready");
+        add(statusLabel, BorderLayout.NORTH);
+
+        isComplaintAvailable = true;
+        lastComplaintTimestamp = new Date();
+    }
+
+    private synchronized void sendComplaint() {
+        if (!isComplaintAvailable) {
+            Date currentTimestamp = new Date();
+            long timeDifference = currentTimestamp.getTime() - lastComplaintTimestamp.getTime();
+            long maxWaitingTime = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
+
+            if (timeDifference <= maxWaitingTime) {
+                statusLabel.setText("Status: Please wait before sending another complaint.");
+                return;
+            }
+        }
+
+        String complaint = complaintsTextArea.getText();
+
+        // Process the complaint (e.g., send it to the appropriate department, store it in a database, etc.)
+
+        isComplaintAvailable = false;
+        lastComplaintTimestamp = new Date();
+
+        complaintsTextArea.setText("");
+        statusLabel.setText("Status: Complaint sent successfully.");
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                ComplaintsGUI complaintsGUI = new ComplaintsGUI();
+                complaintsGUI.setVisible(true);
+            }
+        });
+    }
+}
