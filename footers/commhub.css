@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    color: #333;
+  }
+  
+  header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  h1 {
+    margin: 0;
+  }
+  
+  main {
+    padding: 20px;
+  }
+  
+  .problems {
+    margin-bottom: 40px;
+  }
+  
+  .problem {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .problem h3 {
+    color: #007bff;
+    margin-top: 0;
+  }
+  
+  .answers {
+    margin-top: 10px;
+  }
+  
+  .answers h4 {
+    margin-bottom: 5px;
+  }
+  
+  .answers ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .answers li {
+    margin-bottom: 5px;
+  }
+  
+  .add-problem,
+  .answer-problem {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  form label,
+  form textarea,
+  form input[type="text"],
+  form select {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  form button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    .problem,
+    .add-problem,
+    .answer-problem {
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    .answers {
+      margin-left: 20px;
+    }
+  }
+  

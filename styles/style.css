@@ -1,0 +1,74 @@
+body {
+    font-family: 'Press Start 2P', Arial, sans-serif; /* Import a pixel-style font */
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa; /* Light background color */
+    color: #333; /* Dark text color */
+}
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff; /* White container background */
+    border-radius: 20px; /* Increased border radius */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 30px; /* Larger font size */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 2px; /* Increased letter spacing */
+    color: #007bff; /* Bright blue color */
+}
+
+input {
+    width: calc(100% - 20px); /* Adjusted width to fit container */
+    margin-bottom: 20px; /* Increased space between inputs */
+    padding: 15px; /* Increased padding for inputs */
+    font-size: 16px;
+    border-radius: 10px; /* Increased border radius */
+    border: 2px solid #007bff; /* Bright blue border */
+    background-color: #f0f0f0; /* Light gray background */
+    color: #333; /* Dark text color */
+    outline: none;
+}
+
+input:focus {
+    border-color: #1abc9c; /* Bright green border on focus */
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+
+.button {
+    display: inline-block;
+    padding: 15px 30px; /* Increased padding for buttons */
+    margin: 10px;
+    font-size: 18px; /* Larger font size */
+    border-radius: 25px; /* More rounded corners */
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff; /* Bright blue color */
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+}
+
+.button:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+    transform: translateY(-3px); /* Move button up slightly */
+}
+
+.button:active {
+    background-color: #004080; /* Even darker blue color on active state */
+    transform: translateY(1px); /* Move button down slightly */
+}
