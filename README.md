@@ -9,6 +9,7 @@ job board project repository
 <div class="container">
 <div class="row">
 <h1>Job Board - Login</h1>
+  <img src = "C:\Users\hp\Desktop\thrash">
 <form action="process-login.php" method="post"><!DOCTYPE html>
 <html>
 <head>
