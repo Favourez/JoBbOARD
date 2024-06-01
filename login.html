@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <div class="container">
+    <img class="logo" src="images/logo.png" alt="Logo">
+    <h1>Login Page</h1>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <input type="submit" value="Submit" class="sub" id="submit">
+      <a href="#" onclick="loginWithGoogle()" class="button">Login with Google</a>
+    </form>
+  </div>
+  
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+    import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+    
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCQ2pqMF9AGpqswdTeahsoDC1M57aErafM",
+      authDomain: "job-board-c0cba.firebaseapp.com",
+      projectId: "job-board-c0cba",
+      storageBucket: "job-board-c0cba.appspot.com",
+      messagingSenderId: "952776217509",
+      appId: "1:952776217509:web:ae94c4e0ec99e9b9f9ce4c",
+      measurementId: "G-TG7JQNR5J4"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    document.getElementById("loginForm").addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      const dbRef = ref(database);
+
+      get(child(dbRef, `user/${username}`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          const userData = snapshot.val();
+          if (userData.email === email && userData.password === password) {
+            alert("Login successful");
+            window.location.href = 'homepage.html';
+          } else {
+            alert("Invalid email or password");
+          }
+        } else {
+          alert("User does not exist");
+        }
+      }).catch((error) => {
+        console.error("Error reading from database: ", error);
+        alert("Error logging in. Please try again.");
+      });
+    });
+
+    function loginWithGoogle() {
+      // Placeholder for Google login functionality
+      alert("Login with Google is not implemented yet.");
+    }
+  </script>
+</body>
+</html>
