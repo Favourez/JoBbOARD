@@ -11,6 +11,7 @@ job board project repository
 ![image](https://github.com/Favourez/JoBbOARD/assets/151444383/ba3a0b2d-a336-445d-8cb7-27ccd475b2dc)
 
 <h2>This website aims at helping its users find and share available jobs in thier communities or locations!</h2>
+<h2>developed May - 2024</h2>
 
 <div class="container">
 <div class="row">
