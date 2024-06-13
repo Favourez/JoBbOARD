@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <div class="container">
+    <img class="logo" src="images/logo.png" alt="Logo">
+    <h1>Login Page</h1>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <input type="submit" value="Submit" class="sub" id="submit">
+      <a href="#" onclick="loginWithGoogle()" class="button">Login with Google</a>
+    </form>
+  </div>
+  
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    // todo: import the authentication methods form SDK methods
+    // import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js;
+    // import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+    // import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+    
+    
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-auth.js";
+    
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCQ2pqMF9AGpqswdTeahsoDC1M57aErafM",
+      authDomain: "job-board-c0cba.firebaseapp.com",
+      projectId: "job-board-c0cba",
+      storageBucket: "job-board-c0cba.appspot.com",
+      messagingSenderId: "952776217509",
+      appId: "1:952776217509:web:ae94c4e0ec99e9b9f9ce4c",
+      measurementId: "G-TG7JQNR5J4"
+    };
+
+    // Initialize Firebase
+    // Firebase
+    
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Login with email and password
+    document.getElementById("loginForm").addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // signInWithEmailAndPassword(auth, email, password)
+      //.then((userCredential) => {
+      //   // Signed in
+      //   const user = userCredential.user;
+      //   //...
+      // })
+      //.catch((error) => {
+      //   const errorCode = error.code;
+      //   const errorMessage = error.message;
+      //   const email = error.email;
+      //   const credential = GoogleAuthProvider.credentialFromError(error);
+      //   //...
+      // });
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in successfully
+          alert("Login successful");
+          localStorage.setItem('username', username);
+          window.location.href = 'homepage.html';
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          alert(`Error: ${errorMessage}`);
+        });
+    });
+
+    // Login with Google
+    function loginWithGoogle() {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          // Google login successful
+          alert("Login with Google successful");
+          window.location.href = 'homepage.html';
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          alert(`Error: ${errorMessage}`);
+        });
+    }
+  </script>
+</body>
+</html>
