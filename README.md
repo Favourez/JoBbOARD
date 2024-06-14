@@ -13,7 +13,9 @@ job board project repository
 <h2>This website aims at helping its users find and share available jobs in thier communities or locations!</h2>
 <h2>developed May - 2024</h2>
 
-<div class="container">
+<h2>A power point explaining the job board</h2>
+<div class="container">[The_Power_of_Job_Boards.pptx](https://github.com/user-attachments/files/15844344/The_Power_of_Job_Boards.pptx)
+
 <div class="row">
 <h1>Job Board - Login</h1>
 <form action="process-login.php" method="post"><!DOCTYPE html>
