@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>User Profile</title>
+</head>
+<body>
+    <div class="profile">
+        <img src="c:\Users\DELL\Desktop\27\Achukwi peace 27.jpg" alt="Achukwi peace 27.jpg" class="profile-image">
+        <h1 class="profile-name">Achukwi Mbuowne Ngngabou</h1>
+        <p class="profile-description">Web Developer | UI/UX Designer</p>
+        <ul class="profile-details">
+            <li>Education: B.S. in Computer Science</li>
+            <li>Work Experience: 5 years</li>
+            <li>Skills: HTML, CSS, JavaScript,Python</li>
+            <li>Contact: achukwigeraldsalvador@gmail.com</li>
+        </ul>
+        <button class="edit-profile">Edit Profile</button>
+    </div>
+</body>
+</html>
