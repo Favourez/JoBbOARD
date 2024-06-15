@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Job Application</title>
+  <link rel="stylesheet" href="applyjobs.css">
+</head>
+<body>
+  <div class="container">
+    <img class="logo" src="images/logo.png" alt="Logo">
+    <h1>Job Application</h1>
+    <form id="applicationForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Email" required>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" placeholder="Phone Number" required>
+
+      <label for="salary">Proposed Salary:</label>
+      <input type="text" id="salary" placeholder="Proposed Salary" required>
+
+      <label for="resume">Upload Resume:</label>
+      <input type="file" id="resume" accept=".pdf,.doc,.docx" required>
+
+      <input type="submit" value="Submit" class="sub" id="submit">
+    </form>
+  </div>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyD-0Zsn12h8fomXZZePyY0AfWw38vxN69Q",
+      authDomain: "applyjobsnow-fa329.firebaseapp.com",
+      projectId: "applyjobsnow-fa329",
+      storageBucket: "applyjobsnow-fa329.appspot.com",
+      messagingSenderId: "310207482942",
+      appId: "1:310207482942:web:4fe4fd3fa730ef7fb0956f"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const storage = getStorage(app);
+
+    document.getElementById("applicationForm").addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const salary = document.getElementById("salary").value;
+      const resume = document.getElementById("resume").files[0];
+
+      if (resume) {
+        const storageRef = sRef(storage, 'resumes/' + resume.name);
+        uploadBytes(storageRef, resume).then((snapshot) => {
+          getDownloadURL(snapshot.ref).then((downloadURL) => {
+            set(ref(database, 'applications/' + name), {
+              name: name,
+              email: email,
+              phone: phone,
+              salary: salary,
+              resumeURL: downloadURL
+            }).then(() => {
+              alert("Application submitted successfully!");
+              document.getElementById("applicationForm").reset();
+            }).catch((error) => {
+              console.error("Error writing to database: ", error);
+              alert("Error submitting application. Please try again.");
+            });
+          });
+        }).catch((error) => {
+          console.error("Error uploading file: ", error);
+          alert("Error uploading resume. Please try again.");
+        });
+      } else {
+        alert("Please upload a resume.");
+      }
+    });
+  </script>
+</body>
+</html>
