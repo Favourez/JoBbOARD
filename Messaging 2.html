@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Messaging System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaa14e;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #8c7d7d;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #a9d5ee;
+            border-radius: 3px;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #6d6464;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Job Messaging System</h1>
+    <form action="send_message.php" method="post">
+        <input type="text" name="user_to" placeholder="Recipient ID">
+        <textarea name="message" placeholder="Type your message"></textarea>
+        <button type="submit">Send</button>
+    </form>
+    <!-- Display received messages here -->
+</body>
+</html>
