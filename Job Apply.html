@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Application Form</title>
+<style>
+  body {
+    background-image: url('https://example.com/background-image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #7e7878;
+    font-family: Arial, sans-serif;
+  }
+  h2 {
+    color: #7e9aa3;
+    background-color: #0074D9;
+    padding: 10px;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  input[type="text"],
+  input[type="email"],
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  input[type="file"] {
+    display: block;
+  }
+  input[type="submit"] {
+    background-color: #2ECC40;
+    color: #dbeb9f;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<h2>Job Application Form</h2>
+
+<form action="/submit-application" method="post" enctype="multipart/form-data">
+  <label for="jobListing">Select Job Listing:</label>
+  <select name="jobListing" id="jobListing">
+    <option value="softwareEngineer">Software Engineer</option>
+    <option value="dataAnalyst">Data Analyst</option>
+    <option value="productManager">Product Manager</option>
+    <!-- Add other job listings here -->
+  </select>
+
+  <label for="fullName">Full Name:</label>
+  <input type="text" id="fullName" name="fullName" required>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="resume">Upload Resume:</label>
+  <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+
+  <label for="coverLetter">Upload Cover Letter:</label>
+  <input type="file" id="coverLetter" name="coverLetter" accept=".pdf,.doc,.docx" required>
+
+  <input type="submit" value="Submit Application">
+</form>
+</body>
+</html>
