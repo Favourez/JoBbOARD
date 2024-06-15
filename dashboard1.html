@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <style>
+    /* Add your CSS styling here */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .user-info {
+      margin-bottom: 10px;
+    }
+    .user-info label {
+      font-weight: bold;
+    }
+    .user-info input {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    .user-info button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: rgb(169, 212, 224);
+      border: none;
+      cursor: pointer;
+    }
+    .user-info button:hover {
+      background-color: #45a049;
+    }
+    .admin-info {
+      margin-top: 30px;
+      display: none;
+    }
+    .admin-info label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .admin-info span {
+      font-weight: normal;
+    }
+  </style>
+  <script>
+    // Add your JavaScript code here
+    function showAdminInfo() {
+      var adminInfo = document.getElementById("admin-info");
+      adminInfo.style.display = "block";
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Admin Dashboard</h1>
+    </div>
+    <div class="user-info">
+      <label for="username">Username:</label>
+      <input type="text" id="username" placeholder="Enter username">
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter password">
+      <button onclick="showAdminInfo()">Create Administrative</button>
+    </div>
+    <div class="admin-info" id="admin-info">
+      <h2>Administrative Information</h2>
+      <label for="admin-name">Name:</label>
+      <span id="admin-name">John Doe</span>
+      <label for="admin-email">Email:</label>
+      <span id="admin-email">john.doe@gmail.com</span>
+      <label for="admin-role">Role:</label>
+      <span id="admin-role">Administrator</span>
+    </div>
+  </div>
+</body>
+</html>
