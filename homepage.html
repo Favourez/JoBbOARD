@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="styles/homestyle.css">
+    <style>
+        /* Add some styles for the suggestion dropdown */
+        .suggestions {
+            position: absolute;
+            border: 1px solid #ccc;
+            background-color: white;
+            max-height: 200px;
+            overflow-y: auto;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .suggestions ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .suggestions li {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .suggestions li:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
 </head>
 <body>
     <header class="navbar">
@@ -12,7 +39,8 @@
             <a href="#" class="logo">JoB BoARD</a>
             
             <nav>
-                <input type="text" placeholder="What service are you looking for today?" class="search-bar">
+                <input type="text" placeholder="What service are you looking for today?" class="search-bar" id="searchBar">
+                <div class="suggestions" id="suggestions"></div>
                 <ul class="nav-links">
                     <li><a href="footers/careers.html">JoB Select</a></li>
                     <li><a href="top/messages.html">Messages</a></li>
@@ -119,7 +147,8 @@
             <p>&copy; JoB BoARD International Ltd. 2024</p>
         </div>
     </footer>
-    <script src="sessiontimeout.js">
+    <script src="sessiontimeout.js"></script>
+    <script>
         // Retrieve the username from localStorage and display it
         const username = sessionStorage.getItem('username');
         if (username) {
@@ -128,6 +157,51 @@
             // Redirect to login page if username is not found
             window.location.href = 'login.html';
         }
+
+        // Job suggestions logic
+        const searchBar = document.getElementById('searchBar');
+        const suggestionsContainer = document.getElementById('suggestions');
+        const jobSuggestions = [
+            'Graphics Designer',
+            'Web Developer',
+            'Housekeeper',
+            'Video Editor',
+            'Driver',
+            'Music Producer',
+            'Accountant',
+            'Teacher',
+            'Data Analyst',
+            'AI Specialist'
+        ];
+
+        searchBar.addEventListener('input', () => {
+            const query = searchBar.value.toLowerCase();
+            const filteredSuggestions = jobSuggestions.filter(job => job.toLowerCase().includes(query));
+
+            // Clear previous suggestions
+            suggestionsContainer.innerHTML = '';
+
+            if (filteredSuggestions.length > 0 && query.length > 0) {
+                const ul = document.createElement('ul');
+                filteredSuggestions.forEach(job => {
+                    const li = document.createElement('li');
+                    li.textContent = job;
+                    li.addEventListener('click', () => {
+                        searchBar.value = job;
+                        suggestionsContainer.innerHTML = '';
+                    });
+                    ul.appendChild(li);
+                });
+                suggestionsContainer.appendChild(ul);
+            }
+        });
+
+        // Close suggestions when clicking outside
+        document.addEventListener('click', (e) => {
+            if (e.target !== searchBar) {
+                suggestionsContainer.innerHTML = '';
+            }
+        });
     </script>
 </body>
 </html>
