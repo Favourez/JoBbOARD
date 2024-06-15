@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Job Application</title>
+  <link rel="stylesheet" href="applyjobs.css">
+</head>
+<body>
+  <div class="container">
+    <img class="logo" src="logo.png" alt="Logo">
+    <h1>Job Application</h1>
+    <form id="applicationForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Email" required>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" placeholder="Phone Number" required>
+
+      <label for="salary">Proposed Salary:</label>
+      <input type="text" id="salary" placeholder="Proposed Salary" required>
+
+      <label for="resume">Upload Resume:</label>
+      <input type="file" id="resume" accept=".pdf,.doc,.docx" required>
+
+      <input type="submit" value="Submit" class="sub" id="submit">
+    </form>
+    <div id="progressContainer" style="display: none;">
+      <label for="fileUploadProgress">Upload Progress:</label>
+      <progress id="fileUploadProgress" value="0" max="100"></progress>
+      <span id="progressPercentage">0%</span>
+    </div>
+  </div>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyC72N6QLThLQfTEp-XAfO0_QpVlO2KnN6I",
+      authDomain: "jobs-24fb9.firebaseapp.com",
+      projectId: "jobs-24fb9",
+      storageBucket: "jobs-24fb9.appspot.com",
+      messagingSenderId: "986938940965",
+      appId: "1:986938940965:web:7ab3fe84b5080cb383a9cc",
+      measurementId: "G-2J657Z3KR1"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const storage = getStorage(app);
+
+    document.getElementById("applicationForm").addEventListener('submit', function(e) {
+      e.preventDefault();
+      console.log("Form submitted");
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const salary = document.getElementById("salary").value;
+      const resume = document.getElementById("resume").files[0];
+
+      console.log("Name: ", name);
+      console.log("Email: ", email);
+      console.log("Phone: ", phone);
+      console.log("Salary: ", salary);
+      console.log("Resume: ", resume);
+
+      if (resume) {
+        const storageRef = sRef(storage, 'resumes/' + resume.name);
+        console.log("Uploading resume...");
+
+        const uploadTask = uploadBytesResumable(storageRef, resume);
+        
+        // Show progress bar
+        document.getElementById('progressContainer').style.display = 'block';
+        
+        uploadTask.on('state_changed', 
+          (snapshot) => {
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            document.getElementById('fileUploadProgress').value = progress;
+            document.getElementById('progressPercentage').innerText = progress.toFixed(2) + '%';
+          }, 
+          (error) => {
+            // Handle unsuccessful uploads
+            console.error("Error uploading file: ", error);
+            alert("Error uploading resume. Please try again.");
+          }, 
+          () => {
+            // Handle successful uploads on complete
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              console.log("Resume download URL: ", downloadURL);
+
+              set(ref(database, 'applications/' + name), {
+                name: name,
+                email: email,
+                phone: phone,
+                salary: salary,
+                resumeURL: downloadURL
+              }).then(() => {
+                alert("Application submitted successfully!");
+                document.getElementById("applicationForm").reset();
+                document.getElementById('progressContainer').style.display = 'none';
+              }).catch((error) => {
+                console.error("Error writing to database: ", error);
+                alert("Error submitting application. Please try again.");
+                document.getElementById('progressContainer').style.display = 'none';
+              });
+            });
+          }
+        );
+      } else {
+        alert("Please upload a resume.");
+      }
+    });
+  </script>
+</body>
+</html>
